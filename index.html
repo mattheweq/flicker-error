@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="libraries/p5.js"></script>
+  <script src="libraries/p5.dom.js"></script>
+  <link rel='shortcut icon' href='https://easycss.github.io/favicon/favicon.png' type='image/x-icon' />
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    body{
+      margin: 0;
+      padding: 0;
+    }
+    canvas{
+      display: none;
+    }
+    @media (min-width: 768px){
+      canvas{
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    }
+  </style>
+  <title>Flicker Error</title>
+</head>
+<body>
+ <div id="script-container"></div>
+
+<script>
+const scriptContainer = document.getElementById('script-container');
+
+function loadFlickerErrorScript() {
+  const script = document.createElement('script');
+  script.src = 'flicker-error.js';
+  scriptContainer.appendChild(script);
+}
+
+function checkViewportSizeAndLoadScripts() {
+  if (window.innerWidth >= 768) {
+    loadFlickerErrorScript();
+  } 
+   else {
+    scriptContainer.innerHTML = "<p style='margin-top: 50px; color: red; text-align: center;'>Designed for larger screens. Please use another device.</p>";
+  }
+
+}
+
+checkViewportSizeAndLoadScripts();
+
+window.addEventListener('resize', () => {
+  // Remove previously loaded scripts
+  scriptContainer.innerHTML = '';
+  checkViewportSizeAndLoadScripts();
+});
+
+
+window.addEventListener('resize', () => {
+  location.reload();
+});
+</script>
+
+</body>
+</html>
